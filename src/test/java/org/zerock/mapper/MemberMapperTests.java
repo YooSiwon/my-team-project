@@ -32,17 +32,19 @@ public class MemberMapperTests {
 	public void testGetList() {
 		List<MemberVO> list = mapper.getList();
 		
+		
 	}	
 	@Test
 	public void testInsert() {
 		
 		MemberVO member = new MemberVO();
-		member.setId("new id");
-		member.setPassword("new password");
-		member.setName("새로 작성하는 이름");
-		member.setNickname("new 닉네임");
-		member.setPhone("휴대폰 번호");
-		member.setEmail("new 이메일");			
+		member.setId("신규회원");
+		member.setPassword("새 password");
+		member.setName("나의이름");
+		member.setNickname("새닉네임");
+		member.setPhone("0104556");
+		member.setEmail("새 이메일");
+			
 		
 		mapper.insert(member);
 		
@@ -70,12 +72,12 @@ public class MemberMapperTests {
 		
 		MemberVO member = new MemberVO();
 		
-		member.setId("newbie");
-		member.setPassword("change password");
-		member.setName("새로 작성하는 이름");
-		member.setNickname("새로운 닉네임");
-		member.setPhone("010");
-		member.setEmail("새로운 이메일");
+		member.setId("id");
+		member.setPassword("바뀐 ");
+		member.setName("새");
+		member.setNickname("새로 닉네임");
+		member.setPhone("0109577");
+		member.setEmail("바뀐 메일");
 		
 		
 		int id = mapper.update(member);
