@@ -18,6 +18,13 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class MemberMapperTests {
 	
+	private static final Long Member = null;
+	private static final Long Id = null;
+	private static final Long Password = null;
+	private static final Long Name = null;
+	private static final Long Nickname = null;
+	private static final Long PHONE = null;
+	private static final Long EMAIL = null;
 	@Setter(onMethod_ = @Autowired)
 	private MemberMapper mapper;
 	
@@ -25,58 +32,58 @@ public class MemberMapperTests {
 	public void testGetList() {
 		List<MemberVO> list = mapper.getList();
 		
+	}	
 	@Test
-	public void testinsertTest() {
+	public void testInsert() {
 		
 		MemberVO member = new MemberVO();
-		member.setId("---");
-		member.setPassword("수정된 비밀번호");
-		member.setName("수정된 이름");
-		member.setNickname("수정된 닉네임");		
-		member.setPhone("수정된 번호");
-		member.setEmail("수정된 이메일");
-		
+		member.setId("new id");
+		member.setPassword("new password");
+		member.setName("새로 작성하는 이름");
+		member.setNickname("new 닉네임");
+		member.setPhone("휴대폰 번호");
+		member.setEmail("new 이메일");			
 		
 		mapper.insert(member);
 		
 		log.info(member);
 		
+	}
+	
 	@Test
 	public void testRead() {
-			
-		MemberVO member = mapper.read(5L);
-			
+		
+		MemberVO member = mapper.read("new id");
+				
+		
 		log.info(member);
+	}
 	
 	@Test
 	public void testDelete() {
 		
-		log.info("DELETE COUNT: " + mapper.delete(3L));
-		
+		log.info("DELETE : " + mapper.delete("new id"));
+	}
+
 	@Test
 	public void testUpdate() {
+		
 		MemberVO member = new MemberVO();
-		member.setId("---");
-		member.setPassword("수정된 비밀번호");
-		member.setName("수정된 이름");
-		member.setNickname("수정된 닉네임");		
-		member.setPhone("수정된 번호");
-		member.setEmail("수정된 이메일");
+		
+		member.setId("newbie");
+		member.setPassword("change password");
+		member.setName("새로 작성하는 이름");
+		member.setNickname("새로운 닉네임");
+		member.setPhone("010");
+		member.setEmail("새로운 이메일");
+		
+		
+		int id = mapper.update(member);
+		log.info("UPDATE id: " + "change id");
 		
 		
 	}
-		
-		
-	}
-		
-		}
-		
-		
-		
-	}
-		
-		
-	}
+
 }
 
 

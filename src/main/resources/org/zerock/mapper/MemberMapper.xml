@@ -11,51 +11,34 @@ select * from Member
 ]]>
 </select>
 
-	<insert id="insert">
-		insert into Member (id, password, name, nickname, phone, email,)
-		values (seq_board.nextval, 
-				#{id}, 
-				#{password}, 
-				#{name}, 
-				#{nickname}, 
-				#{phone}, 
-				#{email},)
-	</insert>
+<insert id="insert">
+	insert into Member (id, password, name, nickname, phone, email, regdate)
+	values (#{id}, #{password}, #{name}, #{nickname}, #{phone},	#{email}, sysdate)
+</insert>
 	
-	<insert id="insertSelectKey">
-		<selectKey keyProperty="Member" order="BEFORE" resultType="long">
-		select seq_board.nextval from dual
-		</selectKey>
+<select id="read" resultType="org.zerock.domain.MemberVO">
+	select * from Member where id = #{id}
+</select>
+
+<delete id="delete" >
+	delete from Member where id = #{id}
+</delete>
 	
-		insert into Member (Member, id, password, name, nickname, phone, email,)
-		values (#{id}, 
-				#{password}, 
-				#{name}, 
-				#{nickname}, 
-				#{phone}, 
-				#{email},)
-	</insert>
+<update id="update">
+	update Member
+	set id= #{id},
+	password= #{password},
+	name= #{name},
+	nickname= #{nickname},
+	phone= #{phone},
+	email= #{email},
+	regdate= sysdate + 9/24
+	where id = #{id}	
+</update>
 	
-	<select id="read" resultType="org.zerock.domain.BoardVO">
-		select * from Member 
-	</select>
 	
-	<delete id="delete">
-		delete from Member
-	</delete>
 	
-	<update id="update">
-	UPDATE Member
-	SET
-	  id = #{id},
-	  password = #{password},
-	  name = #{name},
-	  nickname = #{nickname},
-	  phone = #{phone},
-	  email = #{email},
-	WHERE
-	  bno = #{bno}
-	</update>
+	
 
 </mapper>
 
