@@ -38,12 +38,12 @@ public class MemberMapperTests {
 	public void testInsert() {
 		
 		MemberVO member = new MemberVO();
-		member.setId("신규회원");
-		member.setPassword("새 password");
-		member.setName("나의이름");
-		member.setNickname("새닉네임");
-		member.setPhone("0104556");
-		member.setEmail("새 이메일");
+		member.setId("KIM");
+		member.setPassword("나의password1");
+		member.setName("김치");
+		member.setNickname("여행자");
+		member.setPhone("0105555555");
+		member.setEmail("jsijdai");
 			
 		
 		mapper.insert(member);
@@ -72,12 +72,12 @@ public class MemberMapperTests {
 		
 		MemberVO member = new MemberVO();
 		
-		member.setId("id");
-		member.setPassword("바뀐 ");
-		member.setName("새");
-		member.setNickname("새로 닉네임");
-		member.setPhone("0109577");
-		member.setEmail("바뀐 메일");
+		member.setId("KIM");
+		member.setPassword("wnddkd12123");
+		member.setName("kim맨");
+		member.setNickname("여행인");
+		member.setPhone("01056456");
+		member.setEmail("malsklakslnkf");
 		
 		
 		int id = mapper.update(member);
