@@ -24,7 +24,6 @@ public interface MemberService {
 
 	MemberVO getMemberId(String id);
 
-	MemberVO getMemberNn(String nn);
 	
 	
 }

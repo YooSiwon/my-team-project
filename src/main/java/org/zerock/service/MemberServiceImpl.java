@@ -57,9 +57,4 @@ public class MemberServiceImpl implements MemberService {
 		return null;
 	}
 
-	@Override
-	public MemberVO getMemberNn(String nn) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

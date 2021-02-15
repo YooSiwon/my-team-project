@@ -1,6 +1,7 @@
 package org.zerock.mapper;
 
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -27,6 +28,7 @@ public class MemberMapperTests {
 	private static final Long EMAIL = null;
 	@Setter(onMethod_ = @Autowired)
 	private MemberMapper mapper;
+	private Date regdate;
 	
 	@Test
 	public void testGetList() {
@@ -38,13 +40,13 @@ public class MemberMapperTests {
 	public void testInsert() {
 		
 		MemberVO member = new MemberVO();
-		member.setId("KIM5");
-		member.setPassword("나password1");
-		member.setName("김치5");
-		member.setNickname("여행자5");
-		member.setPhone("0105444");
-		member.setEmail("jsijda22@naver.com");
-			
+		member.setId("KIM6");
+		member.setPassword("나password6");
+		member.setName("김치6");
+		member.setNickname("여행자6");
+		member.setPhone("01066666666");
+		member.setEmail("traver@naver.com");
+		member.setRegdate(regdate);	
 		
 		mapper.insert(member);
 		
@@ -55,7 +57,7 @@ public class MemberMapperTests {
 	@Test
 	public void testRead() {
 		
-		MemberVO member = mapper.read("new id");
+		MemberVO member = mapper.read("KIM6");
 				
 		
 		log.info(member);
@@ -64,7 +66,7 @@ public class MemberMapperTests {
 	@Test
 	public void testDelete() {
 		
-		log.info("DELETE : " + mapper.delete("new id"));
+		log.info("DELETE : " + mapper.delete("KIM6"));
 	}
 
 	@Test
@@ -72,12 +74,12 @@ public class MemberMapperTests {
 		
 		MemberVO member = new MemberVO();
 		
-		member.setId("KIM2");
-		member.setPassword("wnddkd123");
-		member.setName("kim2번");
-		member.setNickname("여행");
-		member.setPhone("010564546");
-		member.setEmail("malsklakslnkf@naver.com");
+		member.setId("KIM6");
+		member.setPassword("나password6");
+		member.setName("kim61번");
+		member.setNickname("수정여행");
+		member.setPhone("01066666667");
+		member.setEmail("pas@naver.com");
 		
 		
 		int id = mapper.update(member);

@@ -52,16 +52,7 @@ public class MemberServiceTests {
 		
 		log.info(member);
 		
-	}
-
-	//회원 정보 읽기 - 닉네임 
-	@Test
-	public void testGetMemberNn() {
-		MemberVO member = service.getMemberNn("여행객11");
-		
-		log.info(member);
-		
-	}
+	}	
 	
 	
 	//회원 정보 수정

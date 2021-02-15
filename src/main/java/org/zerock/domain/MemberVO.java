@@ -21,6 +21,9 @@ public class MemberVO {
 	// 회원 가입일
 	private Date regdate;
 	
+
+	}
+	
 		
 	
 		

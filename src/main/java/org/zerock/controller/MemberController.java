@@ -19,6 +19,7 @@ import org.zerock.service.MemberService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
+
 @Controller
 @AllArgsConstructor
 @RequestMapping("/member/*")
@@ -30,7 +31,6 @@ public class MemberController {
 	// ##회원가입 - GET
 	@GetMapping("/join")
 	public void register() {
-		
 	}
 
 	// ##회원가입 - POST
@@ -39,11 +39,9 @@ public class MemberController {
 		
 		Map<String, Boolean> errors = new HashMap<String, Boolean>();
 		req.setAttribute("errors", errors);
-		validate(errors, member);
 		
 		if (errors.isEmpty()) {
 			service.register(member);
-			// 서비스에 명령
 			return "redirect:joinSuccess";
 			
 
@@ -57,52 +55,35 @@ public class MemberController {
 	@ResponseBody
 	public String idDupCheck(String inputId) {
 		
-		//아이디 값이 있으면
+		//아이디 값 존재시
+		log.info(inputId);
 		
 		if(inputId.equals("")) {
 			return "-2";
 		} else {
-			MemberVO member = service.getMember(inputId);
+			MemberVO member = service.getMemberId(inputId);
 			
 			if(member == null) {
-				return "0"; // 회원없으면 0 
+				return "0"; //회원 존재시 0
 			} else {
-				return "-1"; //회원있으면 -1 
+				return "-1"; //회원 없다면 -1
 			}
 		}
 	}
 	
-	// ##회원가입 - 닉네임 중복 체크
-	@GetMapping("/join/nicknameDupCheck")
-	@ResponseBody
-	public String nicknameDupCheck(String inputNickname) {
-		
-		//닉네임 값이 있으면
-		
-		if(inputNickname.equals("")) {
-			return "-2";
-		} else {
-			MemberVO member = service.getMember(inputNickname);
-			
-			if(member == null) {
-				return "0"; //회원이 없으면 0 리턴
-			} else {
-				return "-1"; //회원있으면 -1 리턴
-			}
-		}
-	}
 	
-	// ##로그인 성공 메시지
+	
+	// 로그인 성공
 	@GetMapping("/joinSuccess")
 	public void joinSuccess() {
 	}
 
-	// ##로그인 - GET
+	// 로그인 - GET방식
 	@GetMapping("/login")
 	public void login() {
 	}
 
-	// ##로그인 test - POST
+	// ##로그인 - POST방식
 	@PostMapping("/login")
 	@ResponseBody
 	public ResponseEntity<String> login(String inputId, String inputPw, HttpSession session) {
@@ -110,18 +91,26 @@ public class MemberController {
 		log.info(inputId);
 		log.info(inputPw);
 		
-		MemberVO user = service.getMember(inputId);
+		MemberVO user = service.getMemberId(inputId);
 		
-		//사용자의 아이디를 가진 회원이 있다면
+		//아이디 일치 회원
 		if(user != null && inputPw != null) {
-			// member.getPassword(); 사용자가 적은 비밀번호
-			// loginMember.getPassword(); 아이디로 검색해서 꺼낸 회원의 비밀번호
+			// member.getPassword(); 사용자 패스워드
+			// loginMember.getPassword(); 아이디로 검색한 회원의 패스워드
 			
 			boolean checkMemberPw = service.checkMember(inputPw, user.getPassword());
-			//비밀번호 확인
+			//패스워드 확인
 			
 			if(checkMemberPw) {
 				session.setAttribute("authUser", user);
+				//세션에 정보 담기
+				
+				//RedirectAttributes rttr;
+				//		rttr.addAttribute("authUser", user);
+				
+				//		HttpServletRequest req
+				//	req.getSession().setAttribute("authUser", user);
+				
 				
 				
 			}
@@ -130,7 +119,6 @@ public class MemberController {
 				return new ResponseEntity<> (HttpStatus.INTERNAL_SERVER_ERROR);		
 			}
 		}	
-	
 	
 	// ##로그아웃 
 	@GetMapping("/logout")
@@ -141,19 +129,7 @@ public class MemberController {
 		}
 		
 		return "redirect:/index.jsp";
-	}
-	
-	
-	// ##joinErrors 
-	public void validate(Map<String, Boolean> errors, MemberVO member) {
-		checkEmpty(errors, member.getId(), "memberId");
-		checkEmpty(errors, member.getPassword(), "memberPw");
-		checkEmpty(errors, member.getName(), "memberName");
-		checkEmpty(errors, member.getNickname(), "memberNickname");
-		checkEmpty(errors, member.getPhone(), "memberPhone");
-		checkEmpty(errors, member.getEmail(), "memberEmail");		
-	
-	}
+	}	
 	
 	public void checkEmpty(Map<String, Boolean> errors, String value, String fieldName) {
 		
@@ -170,7 +146,7 @@ public class MemberController {
 		
 	}
 	
-	// ##내 정보 수정 - GET
+	// 내 정보 수정 - GET, void(경로로 바로 이동)
 	@GetMapping("/myModify")
 	public void myModifyPage() {
 	
@@ -184,10 +160,10 @@ public class MemberController {
 		log.info(user);
 		log.info(service);
 		log.info(member);
-		MemberVO userMember = service.getMember(user.getId());
+		MemberVO userMember = service.getMemberId(user.getId());
 		
 		boolean checkMember = service.checkMember(userMember.getId(), member.getId());
-		// 동일 아이디 체크
+		//같은 아이디인지 확인
 		
 		if(checkMember) {
 			service.modify(member); 
@@ -195,10 +171,9 @@ public class MemberController {
 			log.info(member);
 			
 			session.setAttribute("authUser", member);
-			//수정된 정보 세션 저장
+			//수정된 멤버 정보를 세션에 저장
 			
 			return "/member/myHome";
-			
 		
 		}
 	
@@ -206,23 +181,36 @@ public class MemberController {
 		
 	}
 	
+	// ##이메일 부분 나누기
+	public void emailDivide(String email) {
+		
+		String emailDiv[] = email.split("@");
+		String emailFront = null;
+		String emailSelect = null;
+		
+		if(emailDiv != null && emailDiv.length >= 2) {
+			emailFront = emailDiv[0];
+			emailSelect = emailDiv[1];
+		}
+		
+		log.info(emailFront);
+		log.info(emailSelect);
+		
+	}
 	
-	 // 내 정보 수정	
-	
+	// ##회원 삭제
 	@DeleteMapping("/delete")
 	@ResponseBody
 	public ResponseEntity<String> delete(String userId, String pwConfirm, HttpSession session) {
-		//회원 삭제
 		log.info(userId);
 		log.info(pwConfirm);
-			
+		log.info("회원탈퇴 모달");
 		
-		
-		MemberVO userMember = service.getMember(userId);
+		MemberVO userMember = service.getMemberId(userId);
 		
 		if(userMember.getPassword().equals(pwConfirm)) {
 			service.remove(userId);
-			log.info("회원탈퇴성공");
+			log.info("회원탈퇴 성공!");
 			
 			if(session != null) {
 				session.invalidate();
@@ -233,8 +221,6 @@ public class MemberController {
 			return new ResponseEntity<> (HttpStatus.INTERNAL_SERVER_ERROR);		
 		}
 	}
-	
-	
 
 	
 }
