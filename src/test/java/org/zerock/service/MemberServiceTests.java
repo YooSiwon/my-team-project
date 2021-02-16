@@ -29,11 +29,11 @@ public class MemberServiceTests {
 	public void testRegister() {
 		MemberVO member = new MemberVO();
 		member.setId("KIM11");
-		member.setPassword("password111");
-		member.setName("김11");
-		member.setNickname("여행객11");
-		member.setPhone("01011111111");
-		member.setEmail("KIM11@naver.com");
+		member.setPassword("패스워드111");
+		member.setName("김13");
+		member.setNickname("여행11");
+		member.setPhone("010156111");
+		member.setEmail("KIM211@naver.com");
 		
 		int before = mapper.getList().size();
 		
@@ -48,7 +48,7 @@ public class MemberServiceTests {
 	//회원 정보 읽기 - 아이디 
 	@Test
 	public void testGetMemberId() {
-		MemberVO member = service.getMemberId("KIM11");
+		MemberVO member = service.getMemberId("KIM6");
 		
 		log.info(member);
 		
@@ -59,7 +59,7 @@ public class MemberServiceTests {
 	@Test
 	public void testModify() {
 		MemberVO member = new MemberVO();
-		member.setId("KIM11");
+		member.setId("KIM6");
 		member.setEmail("sololol@nave.com");
 		member.setPassword("새비밀번호");
 		member.setName("KIM변경");
