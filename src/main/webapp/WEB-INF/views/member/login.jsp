@@ -2,6 +2,8 @@
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="m" tagdir="/WEB-INF/tags"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,18 +22,18 @@
             <div class="loginform-text">
                 <div class="loginform-input">
                     <div class="sinup-module">
-                        <label for="userId" class="sinup-text">
+                        <label for="Id" class="sinup-text">
                             <p>아이디 *</p>
                             <div>
-                                <input type="text" class="TextField-module__input--kfks8 TextField-module__medium--2zybh" id="userId" name="" placeholder="아이디를 입력해주세요." value="">
+                                <input type="text" class="TextField-module__input--kfks8 TextField-module__medium--2zybh" id="Id" name="" placeholder="아이디를 입력해주세요." value="">
                             </div>
                         </label>
                     </div>
                     <div class="sinup-module">
-                        <label for="userPassword" class="sinup-text">
+                        <label for="Password" class="sinup-text">
                             <p>비밀번호 *</p>
                             <div>
-                                <input type="password" class="TextField-module__input--kfks8 TextField-module__medium--2zybh" id="userPassword" name="" placeholder="비밀번호를 입력해주세요" value="">
+                                <input type="password" class="TextField-module__input--kfks8 TextField-module__medium--2zybh" id="Password" name="" placeholder="비밀번호를 입력해주세요" value="">
                             </div>
                         </label>
                     </div>
@@ -52,6 +54,6 @@
             </div>
     </div>
 </form>
-<u:footer/>
+<u:navbar/>
 </body>
 </html>

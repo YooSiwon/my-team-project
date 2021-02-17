@@ -3,7 +3,6 @@ package org.zerock.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.MemberVO;
 import org.zerock.service.MemberService;
 
@@ -35,18 +35,18 @@ public class MemberController {
 
 	// ##회원가입 - POST
 	@PostMapping("/join")
-	public String register(MemberVO member, HttpServletRequest req) {
+	public String register(MemberVO member, RedirectAttributes rttr) {
 		
-		Map<String, Boolean> errors = new HashMap<String, Boolean>();
-		req.setAttribute("errors", errors);
+		Map<String, Boolean> errors = new HashMap<>();
+		
 		
 		if (errors.isEmpty()) {
 			service.register(member);
-			return "redirect:joinSuccess";
+			return "redirect:/member/joinSuccess";
 			
 
 		} else {
-			return "/member/join";
+			return "redirect:/member/join";
 		}
 		
 	}
@@ -138,7 +138,7 @@ public class MemberController {
 		}
 	}
 	
-	
+/*	
 	// ##내 정보 보기
 	@GetMapping("/myHome")
 	public String myHome() {
@@ -221,6 +221,6 @@ public class MemberController {
 			return new ResponseEntity<> (HttpStatus.INTERNAL_SERVER_ERROR);		
 		}
 	}
-
+*/
 	
 }

@@ -2,6 +2,8 @@
   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="m" tagdir="/WEB-INF/tags"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,14 +18,14 @@
 <body>
 <u:navbar/>
 <div class="signup">
-        <form action="#" method="POST">
+        <form action="/member/join" method="post">
             <input type="hidden" name="" value="">
             <div class="signup-info">
                 <div class="sinup-module">
                     <label for="userName" class="sinup-text">
                         <p>이름 *</p>
                         <div>
-                            <input type="text" class="TextField-module__input--kfks8 TextField-module__medium--2zybh" id="userName" name="" placeholder="이름을 입력해주세요." value="">
+                            <input type="text" class="TextField-module__input--kfks8 TextField-module__medium--2zybh" id="userName" name="name" placeholder="이름을 입력해주세요." value="">
                         </div>
                     </label>
                 </div>
@@ -31,7 +33,7 @@
                     <label for="userNickname" class="sinup-text">
                         <p>닉네임 *</p>
                         <div>
-                            <input type="text" class="TextField-module__input--kfks8 TextField-module__medium--2zybh" id="userNickname" name="" placeholder="닉네임을 입력해주세요." value="">
+                            <input type="text" class="TextField-module__input--kfks8 TextField-module__medium--2zybh" id="userNickname" name="nickname" placeholder="닉네임을 입력해주세요." value="">
                         </div>
                     </label>
                 </div>
@@ -39,7 +41,7 @@
                     <label for="userId" class="sinup-text">
                         <p>아이디 *</p>
                         <div>
-                            <input type="text" class="TextField-module__input--kfks8 TextField-module__medium--2zybh" id="userId" name="" placeholder="아이디를 입력해주세요." value="">
+                            <input type="text" class="TextField-module__input--kfks8 TextField-module__medium--2zybh" id="userId" name="id" placeholder="아이디를 입력해주세요." value="">
                         </div>
                     </label>
                 </div>
@@ -47,23 +49,25 @@
                     <label for="userPassword" class="sinup-text">
                         <p>비밀번호 *</p>
                         <div>
-                            <input type="password" class="TextField-module__input--kfks8 TextField-module__medium--2zybh" id="userPassword" name="" placeholder="영문, 숫자, 특수문자 2가지 조합 6~15자" value="">
+                            <input type="password" class="TextField-module__input--kfks8 TextField-module__medium--2zybh" id="userPassword" name="password" placeholder="영문, 숫자, 특수문자 2가지 조합 6~15자" value="">
                         </div>
                     </label>
                 </div>
+                <!--  
                 <div class="sinup-module">
                     <label for="userPassword1" class="sinup-text">
                         <p>비밀번호 확인 *</p>
                         <div>
-                            <input type="password" class="TextField-module__input--kfks8 TextField-module__medium--2zybh" id="userPassword1" name="" placeholder="비밀번호를 한번더 입력해주세요." value="">
+                            <input type="password" class="TextField-module__input--kfks8 TextField-module__medium--2zybh" id="userPassword1" name="password1" placeholder="비밀번호를 한번더 입력해주세요." value="">
                         </div>
                     </label>
                 </div>
+                -->
                 <div class="sinup-module">
                     <label for="userEmail" class="sinup-text">
                         <p>이메일 *</p>
                         <div>
-                            <input type="email" class="TextField-module__input--kfks8 TextField-module__medium--2zybh" id="userEmail" name="" placeholder="q@example.com" value="">
+                            <input type="email" class="TextField-module__input--kfks8 TextField-module__medium--2zybh" id="userEmail" name="email" placeholder="q@example.com" value="">
                         </div>
                     </label>
                 </div>
@@ -71,7 +75,7 @@
                     <label for="userPone" class="sinup-text">
                         <p>전화번호 *</p>
                         <div>
-                            <input type="text" class="TextField-module__input--kfks8 TextField-module__medium--2zybh" id="userPone" name="" placeholder="010-1234-5678" value="">
+                            <input type="text" class="TextField-module__input--kfks8 TextField-module__medium--2zybh" id="userPone" name="phone" placeholder="010-1234-5678" value="">
                         </div>
                     </label>
                 </div> 

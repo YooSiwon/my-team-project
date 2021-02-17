@@ -40,12 +40,12 @@ public class MemberMapperTests {
 	public void testInsert() {
 		
 		MemberVO member = new MemberVO();
-		member.setId("KIM6");
-		member.setPassword("나password6");
-		member.setName("김치6");
-		member.setNickname("여행자6");
-		member.setPhone("01066666666");
-		member.setEmail("traver@naver.com");
+		member.setId("KIM8");
+		member.setPassword("fsnjjj88");
+		member.setName("아무개8");
+		member.setNickname("여행자8");
+		member.setPhone("01088888888");
+		member.setEmail("traver88@naver.com");
 		member.setRegdate(regdate);	
 		
 		mapper.insert(member);
@@ -57,7 +57,7 @@ public class MemberMapperTests {
 	@Test
 	public void testRead() {
 		
-		MemberVO member = mapper.read("KIM6");
+		MemberVO member = mapper.read("KIM8");
 				
 		
 		log.info(member);
@@ -66,7 +66,7 @@ public class MemberMapperTests {
 	@Test
 	public void testDelete() {
 		
-		log.info("DELETE : " + mapper.delete("KIM6"));
+		log.info("DELETE : " + mapper.delete("KIM8"));
 	}
 
 	@Test
@@ -74,12 +74,12 @@ public class MemberMapperTests {
 		
 		MemberVO member = new MemberVO();
 		
-		member.setId("KIM6");
-		member.setPassword("나password6");
-		member.setName("kim61번");
-		member.setNickname("수정여행");
-		member.setPhone("01066666667");
-		member.setEmail("pas@naver.com");
+		member.setId("KIM8");
+		member.setPassword("wdasd88");
+		member.setName("kim8번");
+		member.setNickname("수정여행88");
+		member.setPhone("01066668465");
+		member.setEmail("pas88@naver.com");
 		
 		
 		int id = mapper.update(member);

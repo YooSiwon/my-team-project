@@ -11,29 +11,33 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.zerock.domain.MemberVO;
 import org.zerock.mapper.MemberMapper;
 
+import lombok.Data;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 @Log4j
+@Data
 public class MemberServiceTests {
 	
-	@Autowired
+	@Setter(onMethod_= @Autowired)
 	private MemberService service;
 	
-	@Autowired
+	@Setter(onMethod_= @Autowired)
 	private MemberMapper mapper;
 	
 	//회원 등록
 	@Test
 	public void testRegister() {
 		MemberVO member = new MemberVO();
-		member.setId("KIM11");
-		member.setPassword("패스워드111");
-		member.setName("김13");
-		member.setNickname("여행11");
-		member.setPhone("010156111");
-		member.setEmail("KIM211@naver.com");
+		member.setId("test2");
+		member.setPassword("test");
+		member.setName("test");
+		member.setNickname("test");
+		member.setPhone("test");
+		member.setEmail("test");
+		
 		
 		int before = mapper.getList().size();
 		
@@ -45,10 +49,11 @@ public class MemberServiceTests {
 		
 	}
 	
+	/*
 	//회원 정보 읽기 - 아이디 
 	@Test
 	public void testGetMemberId() {
-		MemberVO member = service.getMemberId("KIM6");
+		MemberVO member = service.getMemberId("KIM8");
 		
 		log.info(member);
 		
@@ -89,6 +94,6 @@ public class MemberServiceTests {
 	
 	
 	
-	
+	*/
 	
 }

@@ -7,7 +7,7 @@
 
 <select id="getList" resultType="org.zerock.domain.MemberVO">
 <![CDATA[
-select * from Member
+	select * from Member
 ]]>
 </select>
 

@@ -22,7 +22,7 @@
 </head>
 <body>
 
-<m:topNav />
+<m:navbar />
 
 <form method="post" action="${root }/member/myModify" >
   <div class="form-group row">
@@ -59,9 +59,9 @@
   
   
   <div class="form-group row">
-    <label for="staticLoc" class="col-sm-2 col-form-label">주소</label>
+    <label for="staticLoc" class="col-sm-2 col-form-label">번호</label>
     <div class="col-sm-10">
-      <input type="text" name="loc" class="form-control-plaintext" id="staticLoc" value="${authUser.loc }">
+      <input type="text" name="phone" class="form-control-plaintext" id="staticLoc" value="${authUser.phone }">
     </div>
   </div>
 	

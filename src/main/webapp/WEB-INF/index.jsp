@@ -3,11 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="m" tagdir="/WEB-INF/tags"%>
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
 <link rel="stylesheet"
   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script
@@ -18,27 +19,21 @@
   src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
-
-
-<title>Insert title here</title>
+<title>mountain conquest</title>
 </head>
 <body>
+<m:topNav />
 
+로그인 된 아이디 : ${authUser.id } <br>
+로그인 된 NO : ${authUser.no }
 
-	<m:navbar />
-
-
-	<div class="media">
-		<div class="media-body">
-			<h5 class="mt-0">WELCOME</h5>
-			회원 가입을 축하합니다.
-		</div>
-	</div>
-
-	<a href="${root }/member/login">
-		<button type="submit" class="btn btn-primary">로그인</button>
-	</a>
-
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+		<img src="<spring:url value='/resources/img/main/mountain_main1.png' />" class="d-block w-80" alt="...">
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
