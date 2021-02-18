@@ -8,6 +8,7 @@ import lombok.Data;
 
 @Data
 public class MemberVO {
+	//회원 id
 	private String id;
 	//회원 pw
 	private String password;
@@ -21,6 +22,8 @@ public class MemberVO {
 	private String email;
 	// 회원 가입일
 	private Date regdate;
+	
+	
 
 }	
 	

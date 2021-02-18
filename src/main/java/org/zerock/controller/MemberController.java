@@ -28,6 +28,10 @@ public class MemberController {
 
 	private MemberService service;
 
+	@GetMapping("/home")
+	public void home() {
+	}
+	
 	// ##회원가입 - GET
 	@GetMapping("/join")
 	public void register() {
@@ -73,7 +77,7 @@ public class MemberController {
 	
 	
 	
-	// 로그인 성공
+	// 회원가입 성공
 	@GetMapping("/joinSuccess")
 	public void joinSuccess() {
 	}
@@ -84,9 +88,8 @@ public class MemberController {
 	}
 
 	// ##로그인 - POST방식
-	@PostMapping("/login")
-	@ResponseBody
-	public ResponseEntity<String> login(String inputId, String inputPw, HttpSession session) {
+	@PostMapping("/login")	
+	public String  login(String inputId, String inputPw, HttpSession session) {
 		
 		log.info(inputId);
 		log.info(inputPw);
@@ -110,16 +113,13 @@ public class MemberController {
 				
 				//		HttpServletRequest req
 				//	req.getSession().setAttribute("authUser", user);
+		
 				
 				
-				
-			}
-				return new ResponseEntity<> ("success", HttpStatus.OK);
-			} else {
-				return new ResponseEntity<> (HttpStatus.INTERNAL_SERVER_ERROR);		
 			}
 		}	
-	
+		return"redirect:/member/home";
+	}
 	// ##로그아웃 
 	@GetMapping("/logout")
 	public String logout(MemberVO member, HttpSession session) {
@@ -128,7 +128,7 @@ public class MemberController {
 			session.invalidate();
 		}
 		
-		return "redirect:/index.jsp";
+		return "redirect:/join";
 	}	
 	
 	public void checkEmpty(Map<String, Boolean> errors, String value, String fieldName) {

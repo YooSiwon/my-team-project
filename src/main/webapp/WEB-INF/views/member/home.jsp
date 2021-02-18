@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="m" tagdir="/WEB-INF/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="u" tagdir="/WEB-INF/tags"%>
 
 <html>
 <head>
 	<title>my fake trip</title>
 </head>
 <meta charset="UTF-8">
- <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 <link rel="stylesheet" href="${root }/resources/assets/css/reset.css">
 <link rel="stylesheet" href="${root }/resources/assets/css/style.css">
@@ -804,7 +803,7 @@
         </div>
       </div>
     </main>
-    <!-- main -->
+    <!-- main --> 
      
 <u:footer/>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>

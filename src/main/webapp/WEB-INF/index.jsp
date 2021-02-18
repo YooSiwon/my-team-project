@@ -19,13 +19,17 @@
   src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
-<title>mountain conquest</title>
+<title>my fake trip</title>
 </head>
 <body>
-<m:topNav />
+<m:navbar />
 
 로그인 된 아이디 : ${authUser.id } <br>
 로그인 된 NO : ${authUser.no }
+
+<c:if test="${login }" >
+<div>modal</div>
+</c:if>
 
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">

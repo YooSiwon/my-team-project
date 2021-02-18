@@ -25,13 +25,18 @@
                 <!-- menu -->
                 <div class="header-menu white">
                     <div class="header-menu-item">
-                        <a class="d-line-block" href="#" data-turbolinks="false">마이페이지</a>
+                        <a class="d-line-block" href="#" data-turbolinks="false">파트너 등록하기</a>
                     </div>
                     <div class="header-menu-item">
-                        <a class="d-line-block" href="#" data-turbolinks="false">회원가입</a>
+                    	<c:if test="${ empty authUser}">
+	                        <a class="d-line-block" href="#" data-turbolinks="false">로그인</a>
+                    	</c:if>
+                    	<c:if test="${ not empty authUser }">
+	                       	<p>${authUser.nickname } 님 환영합니다.</p>
+                    	</c:if>
                     </div>
                     <div class="header-menu-item">
-                        <a class="d-line-block link-btn" href="#">로그인</a>
+                        <a class="d-line-block link-btn" href="#">회원가입</a>
                     </div>
                 </div>
                 <!-- menu -->
@@ -56,18 +61,18 @@
                     <div class="navigation-item">
                         <a href="#">
                             <img src="https://d2ur7st6jjikze.cloudfront.net/cms_icons/18_original_1592284955.png?1592284955" alt="ic_tour_sm">
-                            <span>할인혜택</span>
+                            <span>투어・티켓</span>
                         </a>
                     </div>
                     <div class="divider"></div>
                     <div class="navigation-item">
                         <a href="#">
-                            <span>후기 게시판</span>
+                            <span>랜선투어</span>
                         </a>
                     </div>
                     <div class="navigation-item">
                         <a href="#">
-                            <span>QnA 게시판</span>
+                            <span >할인혜택</span>
                         </a>
                     </div>
                 </div>

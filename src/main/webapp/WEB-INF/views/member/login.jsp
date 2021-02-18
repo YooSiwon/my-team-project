@@ -17,7 +17,7 @@
 </head>
 <body>
 <u:navbar/>
-<form action="#" method="POST">
+<form action="${root }/member/login" method="POST">
         <div class="loginform">
             <div class="loginform-text">
                 <div class="loginform-input">
@@ -25,7 +25,7 @@
                         <label for="Id" class="sinup-text">
                             <p>아이디 *</p>
                             <div>
-                                <input type="text" class="TextField-module__input--kfks8 TextField-module__medium--2zybh" id="Id" name="" placeholder="아이디를 입력해주세요." value="">
+                                <input type="text" class="TextField-module__input--kfks8 TextField-module__medium--2zybh" id="Id" name="inputId" placeholder="아이디를 입력해주세요." value="">
                             </div>
                         </label>
                     </div>
@@ -33,7 +33,7 @@
                         <label for="Password" class="sinup-text">
                             <p>비밀번호 *</p>
                             <div>
-                                <input type="password" class="TextField-module__input--kfks8 TextField-module__medium--2zybh" id="Password" name="" placeholder="비밀번호를 입력해주세요" value="">
+                                <input type="password" class="TextField-module__input--kfks8 TextField-module__medium--2zybh" id="Password" name="inputPw" placeholder="비밀번호를 입력해주세요" value="">
                             </div>
                         </label>
                     </div>
@@ -43,7 +43,8 @@
                             <a href="#" class="findPw">비밀번호 찾기</a>
                         </div>
                     </div>
-                    <div class="sinup-btn">    
+                    <div class="sinup-btn"> 
+                    
                         <button type="submit" class="Button-module__button--1H779 Button-module__primary--3KITS Button-module__large--xFJf5 Button-module__block--2gnY_ undefined">로그인</button>
                     </div>
                 </div>
