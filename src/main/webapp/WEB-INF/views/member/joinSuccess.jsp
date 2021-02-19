@@ -20,12 +20,12 @@
 
 
 
-<title>Insert title here</title>
+<title>my fake trip</title>
 </head>
 <body>
 
 
-	<m:navbar />
+	<u:navbar />
 
 
 	<div class="media">

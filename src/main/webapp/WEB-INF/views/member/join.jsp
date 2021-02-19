@@ -53,7 +53,7 @@
                         </div>
                     </label>
                 </div>
-                <!--  
+                
                 <div class="sinup-module">
                     <label for="userPassword1" class="sinup-text">
                         <p>비밀번호 확인 *</p>
@@ -62,7 +62,7 @@
                         </div>
                     </label>
                 </div>
-                -->
+                
                 <div class="sinup-module">
                     <label for="userEmail" class="sinup-text">
                         <p>이메일 *</p>
