@@ -12,6 +12,8 @@ public class MemberVO {
 	private String id;
 	//회원 pw
 	private String password;
+	// 패스워드 중복체크
+	private String pwConfirm;		
 	//회원 이름
 	private String name;
 	//회원 닉네임
@@ -25,7 +27,13 @@ public class MemberVO {
 	
 	
 
-}	
+	
+
+}
+	
+	
+
+
 	
 
 	

@@ -31,7 +31,7 @@
 	<div class="media">
 		<div class="media-body">
 			<h5 class="mt-0">WELCOME</h5>
-			회원 가입을 축하합니다.
+			회원 가입이 되었습니다.
 		</div>
 	</div>
 
