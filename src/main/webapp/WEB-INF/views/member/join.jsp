@@ -58,7 +58,7 @@
                     <label for="userPassword1" class="sinup-text">
                         <p>비밀번호 확인 *</p>
                         <div>
-                            <input type="password" class="TextField-module__input--kfks8 TextField-module__medium--2zybh" id="userPassword1" name="password1" placeholder="비밀번호를 한번더 입력해주세요." value="">
+                            <input type="password" class="TextField-module__input--kfks8 TextField-module__medium--2zybh" id="userPassword1" name="pwConfirm" placeholder="비밀번호를 한번더 입력해주세요." value="">
                         </div>
                     </label>
                 </div>

@@ -43,8 +43,9 @@ public class MemberController {
 	public String register(MemberVO member, RedirectAttributes rttr) {
 		
 		Map<String, Boolean> errors = new HashMap<>();
-		
-		
+		log.info(member);
+		validate(errors, member);
+		log.info(errors);
 		if (errors.isEmpty()) {
 			service.register(member);
 			return "redirect:/member/joinSuccess";
@@ -147,7 +148,7 @@ public class MemberController {
 			}
 
 			// 비밀번호 패턴 일치 확인
-			String pattern = "([a-zA-Z]+\\d{1}\\w*)|(\\d+[a-zA-Z]{1}\\w*)\""; // 영문, 숫자 조합 2글자 이상 가능
+			String pattern = "([a-zA-Z]+\\d{1}\\w*)|(\\d+[a-zA-Z]{1}\\w*)\""; // 영문, 숫자 조합 2글자 이상 
 			boolean pwRegex = Pattern.matches(pattern, member.getPassword());
 
 			if (!pwRegex) {
@@ -172,7 +173,7 @@ public class MemberController {
 			session.invalidate();
 		}
 		
-		return "redirect:/join";
+		return "redirect:/member/home";
 	}	
 	
 	public void checkEmpty(Map<String, Boolean> errors, String value, String fieldName) {
