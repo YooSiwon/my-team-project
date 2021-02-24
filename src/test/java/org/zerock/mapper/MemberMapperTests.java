@@ -66,7 +66,7 @@ public class MemberMapperTests {
 	@Test
 	public void testDelete() {
 		
-		log.info("DELETE : " + mapper.delete("KIM6"));
+		log.info("DELETE : " + mapper.delete("tesss11"));
 	}
 
 	@Test

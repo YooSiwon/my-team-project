@@ -4,15 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.MemberVO;
@@ -40,20 +38,34 @@ public class MemberController {
 
 	// ##회원가입 - POST
 	@PostMapping("/join")
-	public String register(MemberVO member, RedirectAttributes rttr) {
+	public String register(MemberVO member, Model model, RedirectAttributes rttr) {
 		
 		Map<String, Boolean> errors = new HashMap<>();
 		log.info(member);
-		validate(errors, member);
-		log.info(errors);
+		validate(errors, member);// 에러 체크
+		log.info("errors: " + errors);
+		
 		if (errors.isEmpty()) {
 			service.register(member);
-			return "redirect:/member/joinSuccess";
-			
+			rttr.addFlashAttribute("message", "회원가입이 성공하였습니다.");
+			return "redirect:/member/login";
 
-		} else {
-			return "redirect:/member/join";
 		}
+		
+		if (errors.containsKey("idDuplicated")) {
+			// 아이디 중복
+			model.addAttribute("message", "이미 해당 아이디가 존재합니다.");
+			return "/member/join";
+		} 
+		if (errors.containsKey("pwNotMatch")) {
+			// 비밀번호 불일치
+			model.addAttribute("message", "비밀번호가 일치하지 않습니다.");
+			return "/member/join";
+		} 
+		model.addAttribute("message", "아이디와 비밀번호 패턴을 확인해주세요.");
+		return "/member/join";
+			
+		
 		
 	}
 	// ##회원가입 - 아이디 중복 체크
@@ -65,7 +77,7 @@ public class MemberController {
 			log.info(inputId);
 
 			// 패턴 검사
-			String pattern = "[a-z0-9]{4,20}"; // 영문 소문자, 숫자 4~20글자 가능
+			String pattern = "[a-z0-9]{0,20}"; // 영문 소문자, 숫자 0~20글자 가능
 			boolean idRegex = Pattern.matches(pattern, inputId);
 
 			if (inputId.equals("")) {
@@ -75,9 +87,9 @@ public class MemberController {
 				MemberVO member = service.getMemberId(inputId);
 
 				if (member == null) {
-					return "0"; // 회원이 없으면 0 리턴
+					return "0"; // 회원이 없으면 0 리턴 -> 가입 가능
 				} else {
-					return "-1"; // 회원있으면 -1 리턴
+					return "-1"; // 회원있으면 -1 리턴 -> 에러 코드 
 				}
 			} else {
 				// 정규식에 맞지 않을때
@@ -87,19 +99,28 @@ public class MemberController {
 	
 	
 	
-	// 회원가입 성공
+/*	// 회원가입 성공
 	@GetMapping("/joinSuccess")
 	public void joinSuccess() {
 	}
-
+*/
 	// 로그인 - GET방식
-	@GetMapping("/login")
-	public void login() {
-	}
+		// ##로그인 - GET
+		@GetMapping("/login")
+		public String login(HttpSession session) {
+			if (session.getAttribute("authUser") != null) {
+				// 로그인 된 상태
+//				rttr.addFlashAttribute("login", true);
+				return "redirect:/member/home";
+			} else {
+				// 로그인 안된 상태
+				return "member/login";
+			}
+		}
 
 	// ##로그인 - POST방식
 	@PostMapping("/login")	
-	public String  login(String inputId, String inputPw, HttpSession session) {
+	public String  login(String inputId, String inputPw, HttpSession session, RedirectAttributes rttr, Model model) {
 		
 		log.info(inputId);
 		log.info(inputPw);
@@ -116,34 +137,40 @@ public class MemberController {
 			
 			if(checkMemberPw) {
 				session.setAttribute("authUser", user);
+				rttr.addFlashAttribute("message", user.getId() + "님 환영합니다.");
 				//세션에 정보 담기
 				
 				//RedirectAttributes rttr;
 				//		rttr.addAttribute("authUser", user);
 				
 				//		HttpServletRequest req
-				//	req.getSession().setAttribute("authUser", user);
-		
+				//	req.getSession().setAttribute("authUser", user);		
 				
-				
+			} else {
+				model.addAttribute("message", "아이디가 없거나 패스워드가 일치하지 않습니다.");
+				return "member/login";
 			}
-		}	
+		} else {
+			model.addAttribute("message", "아이디가 없거나 패스워드가 일치하지 않습니다.");
+			return "member/login";
+		}
 		return"redirect:/member/home";
 	}
 	
 	// ##joinErrors
 		public void validate(Map<String, Boolean> errors, MemberVO member) {
+/*			// null 체크
 			checkEmpty1(errors, member.getId(), "memberId");
 			checkEmpty1(errors, member.getPassword(), "memberPw");
 			checkEmpty1(errors, member.getPwConfirm(), "memberPwConfirm");
 			checkEmpty1(errors, member.getEmail(), "memberEmail");
 			checkEmpty1(errors, member.getName(), "memberName");
 			checkEmpty1(errors, member.getNickname(), "memberNickname");			
-
+*/
 			boolean checkMemberPw = service.checkMember(member.getPassword(), member.getPwConfirm());
 			// 비밀번호가 동일한 지 확인
 
-			if (member.getPwConfirm() != null && !checkMemberPw) {
+			if (!checkMemberPw) {
 				errors.put("pwNotMatch", true);
 			}
 
@@ -154,6 +181,22 @@ public class MemberController {
 			if (!pwRegex) {
 				errors.put("pwPatternError", true);
 			}
+			
+			
+			// 아이디 패턴 일치 확인
+			pattern = "[a-z0-9]{0,20}"; // 영문 소문자, 숫자 0~20글자 가능
+			boolean idRegex = Pattern.matches(pattern, member.getId());
+			if(! idRegex) {
+				errors.put("idPatternError", true);
+			}
+			
+			// 아이디 중복
+			MemberVO vo = service.getMemberId(member.getId());
+			if(vo != null) {
+				errors.put("idDuplicated", true);
+			}
+			
+						
 		}			
 		
 
@@ -173,7 +216,7 @@ public class MemberController {
 			session.invalidate();
 		}
 		
-		return "redirect:/member/home";
+		return "redirect:/home";
 	}	
 	
 	public void checkEmpty(Map<String, Boolean> errors, String value, String fieldName) {
