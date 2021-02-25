@@ -97,13 +97,7 @@ public class MemberController {
 			}
 		}
 	
-	
-	
-/*	// 회원가입 성공
-	@GetMapping("/joinSuccess")
-	public void joinSuccess() {
-	}
-*/
+
 	// 로그인 - GET방식
 		// ##로그인 - GET
 		@GetMapping("/login")
